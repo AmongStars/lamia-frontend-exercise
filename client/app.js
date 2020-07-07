@@ -77,9 +77,11 @@ function initMap() {
     marker.addListener("click", function () {
       infowindow.setContent(
         "<div><strong>" +
-          "New place" +
-          "</strong><br>" +
-          "<button onclick='testAlert()' id=''>Delete</button>" +
+          "New place</strong>" +
+          "<br>" +
+          "<button onclick='addToFav()' id=''>Add</button>" +
+          "<br>" +
+          "<button onclick='deleteMarker()' id=''>Delete</button>" +
           "</div>"
       );
       infowindow.open(map, marker);
@@ -122,6 +124,10 @@ function initMap() {
 }
 
 function placeMarkerAndPanTo(latLng, map) {
+  if (marker !== undefined) {
+    marker.setMap(null);
+    marker = undefined;
+  }
   marker = new google.maps.Marker({
     position: latLng,
     map: map,
@@ -132,6 +138,15 @@ function placeMarkerAndPanTo(latLng, map) {
   return marker;
 }
 
-function testAlert() {
+function deleteMarker() {
   marker.setMap(null);
+}
+
+function addToFav() {
+  userMarkers.push(marker);
+  const node = document.getElementById("places");
+  const childNode = document.createElement("li");
+  const textNode = document.createTextNode(marker.title);
+  childNode.appendChild(textNode);
+  node.appendChild(childNode);
 }
