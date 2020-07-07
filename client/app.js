@@ -79,7 +79,7 @@ function initMap() {
         "<div><strong>" +
           "New place" +
           "</strong><br>" +
-          "<button onclick='testAlert()' id=''>Edit</button>" +
+          "<button onclick='testAlert()' id=''>Delete</button>" +
           "</div>"
       );
       infowindow.open(map, marker);
@@ -95,6 +95,7 @@ function initMap() {
     fields: ["name", "formatted_address", "place_id", "geometry"],
   };
 
+  var infowindow = new google.maps.InfoWindow();
   var service = new google.maps.places.PlacesService(map);
 
   service.getDetails(request, function (place, status) {
@@ -132,6 +133,5 @@ function placeMarkerAndPanTo(latLng, map) {
 }
 
 function testAlert() {
-  alert("test");
   marker.setMap(null);
 }
