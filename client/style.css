@@ -157,7 +157,7 @@ li:nth-child(odd) {
 .button-add {
   border-radius: 100%;
   border: 1px solid transparent;
-  background-color: #d2d2d2;
+  background-color: #e4e4e4;
   width: 21px;
 }
 
@@ -169,11 +169,35 @@ li:nth-child(odd) {
 .button-delete {
   border-radius: 50%;
   border: 1px solid transparent;
-  background-color: #d2d2d2;
+  background-color: #e4e4e4;
   width: 21px;
 }
 
 .button-delete:focus {
   border-color: transparent !important;
   outline: none;
+}
+
+.button-edit {
+  border-radius: 10%;
+  border: 1px solid transparent;
+  background-color: #e4e4e4;
+}
+
+.button-edit:focus {
+  border-color: transparent !important;
+}
+
+#btn-save {
+  display: none;
+}
+
+.button-save {
+  border-radius: 10%;
+  border: 1px solid transparent;
+  background-color: #e4e4e4;
+}
+
+.button-save:focus {
+  border-color: transparent !important;
 }
