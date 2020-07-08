@@ -69,6 +69,7 @@ body {
   text-overflow: ellipsis;
   width: 300px;
   z-index: 10;
+  border: 1px solid #b9b9b9;
 }
 
 #search-input:focus {
@@ -112,18 +113,22 @@ body {
   left: 5px;
   top: 40%;
   margin-top: -195px;
-  height: 330px;
+  min-height: 30px;
   width: 200px;
   padding: 5px;
   z-index: 5;
-  border: 1px solid #999;
+  border: 1px solid #c1c1c1;
   background: #fff;
+  overflow:auto;
+  overflow-y: auto;
 }
 
-h3 {
-  font-size: 20px;
-  margin: 0 0 5px 0;
-}
+#left-panel p {
+	text-align: center;
+	margin: 0;
+	background-color: #d2d2d2;
+	font-weight: bold;
+  }
 
 ul {
   list-style-type: none;

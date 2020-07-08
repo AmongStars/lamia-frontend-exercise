@@ -156,3 +156,14 @@ function saveMarker() {
     btnToggle.style.display = "block";
   }
 }
+
+// Collapse Favourites
+
+function collapsePlaces() {
+	var btnToggle = document.getElementById("left-panel-places");
+	if (btnToggle.style.display !== "none") {
+	  btnToggle.style.display = "none";
+	} else {
+	  btnToggle.style.display = "block";
+	}
+  }

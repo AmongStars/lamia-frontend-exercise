@@ -7,7 +7,7 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbxnKNvYFZqaiHdYgJAqG5s_IVlW17MDc&callback=initMap&libraries=places&v=weekly"
       defer
     ></script>
-	<link rel="stylesheet" type="text/css" href="./style.css" />
+    <link rel="stylesheet" type="text/css" href="./style.css" />
     <script src="./app.js"></script>
   </head>
   <body>
@@ -17,10 +17,14 @@
       type="text"
       placeholder="Search Places"
     />
-	<div id="map"></div>
-	<div id="left-panel">
-		<p>Favourites</p>
-		<ul id="places"></ul>
-	  </div>
+    <div id="map"></div>
+    <div id="left-panel">
+      <div id="left-panel-fav" onclick='collapsePlaces()'>
+        <p>Favourites</p>
+      </div>
+      <div id="left-panel-places">
+        <ul id="places"></ul>
+      </div>
+    </div>
   </body>
 </html>
