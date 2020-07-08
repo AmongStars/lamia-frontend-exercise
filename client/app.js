@@ -142,12 +142,15 @@ function deleteMarker() {
 }
 
 function addToFav() {
-  userMarkers.push(marker);
-  const node = document.getElementById("places");
-  const childNode = document.createElement("li");
-  const textNode = document.createTextNode(marker.title);
-  childNode.appendChild(textNode);
-  node.appendChild(childNode);
+  console.log(userMarkers.includes(marker));
+  if (!userMarkers.includes(marker)) {
+    userMarkers.push(marker);
+    const node = document.getElementById("places");
+    const childNode = document.createElement("li");
+    const textNode = document.createTextNode(marker.title);
+    childNode.appendChild(textNode);
+    node.appendChild(childNode);
+  }
 }
 
 function editMarker() {
