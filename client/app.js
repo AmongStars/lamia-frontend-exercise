@@ -1,6 +1,6 @@
 var map;
 var marker;
-var userMarkers = [];
+var userMarkers = {};
 
 function initMap() {
   var helsinki = new google.maps.LatLng(60.169, 24.938);
@@ -10,7 +10,7 @@ function initMap() {
     zoom: 12,
   });
 
-  userMarkers.forEach((marker) => {
+  Object.values(userMarkers).forEach((marker) => {
     marker.setMap(map);
   });
 
@@ -78,56 +78,28 @@ function initMap() {
   // Add place on map
   map.addListener("click", function (e) {
     const marker = placeMarkerAndPanTo(e.latLng, map);
+    const markerIndex = Object.keys(userMarkers).length;
     marker.addListener("click", function () {
       infowindow.setContent(
         "<div>" +
           "<div id='editableMarker'><strong>New place</strong></div>" +
           "<div id='btn-add'><button onclick='addToFav()' class='button-add'>+</button></div>" +
-          "<div id='btn-delete'><button onclick='deleteMarker()' class='button-delete'>-</button></div>" +
+          "<div id='btn-delete'><button id='marker-" +
+          markerIndex +
+          "' onclick='deleteMarker(event)' class='button-delete'>-</button></div>" +
           "<div id='btn-edit'><button onclick='editMarker()' class='button-edit'>Edit</button></div>" +
-          "<div id='btn-save'><button onclick='saveMarker()' class='button-save'>Save</button></div>"
+          "<div id='btn-save'><button onclick='saveMarker()' class='button-save'>Save</button></div>" +
+          "</div>"
       );
       infowindow.open(map, marker);
     });
   });
 
   var infowindow = new google.maps.InfoWindow();
-
-  // Get place details
-
-  var request = {
-    placeId: "ChIJN1t_tDeuEmsRUsoyG83frY4",
-    fields: ["name", "formatted_address", "place_id", "geometry"],
-  };
-
-  var infowindow = new google.maps.InfoWindow();
-  var service = new google.maps.places.PlacesService(map);
-
-  service.getDetails(request, function (place, status) {
-    if (status === google.maps.places.PlacesServiceStatus.OK) {
-      var marker = new google.maps.Marker({
-        map: map,
-        position: place.geometry.location,
-      });
-      google.maps.event.addListener(marker, "click", function () {
-        infowindow.setContent(
-          "<div><strong>" +
-            place.name +
-            "</strong><br>" +
-            "Place ID: " +
-            place.place_id +
-            "<br>" +
-            place.formatted_address +
-            "</div>"
-        );
-        infowindow.open(map, this);
-      });
-    }
-  });
 }
 
 function placeMarkerAndPanTo(latLng, map) {
-  if (marker !== undefined && !userMarkers.includes(marker)) {
+  if (marker !== undefined && !Object.values(userMarkers).includes(marker)) {
     marker.setMap(null);
     marker = undefined;
   }
@@ -136,18 +108,23 @@ function placeMarkerAndPanTo(latLng, map) {
     map: map,
     title: "New place",
   });
-  //   map.panTo(latLng);
-  //   marker.setMap(map);
+
   return marker;
 }
 
-function deleteMarker() {
-  marker.setMap(null);
+function deleteMarker(e) {
+  console.log(e.target.id);
+  let { id } = e.target;
+  const markerIdStart = id.indexOf("-") + 1;
+  id = id.substring(markerIdStart, id.length);
+
+  userMarkers[id].setMap(null);
+  delete userMarkers[id];
 }
 
 function addToFav() {
-  if (!userMarkers.includes(marker)) {
-    userMarkers.push(marker);
+  if (!Object.values(userMarkers).includes(marker)) {
+    userMarkers[Object.keys(userMarkers).length] = marker;
     const node = document.getElementById("places");
     const childNode = document.createElement("li");
     const textNode = document.createTextNode(marker.title);
