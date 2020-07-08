@@ -79,9 +79,8 @@ function initMap() {
         "<div><strong>" +
           "New place</strong>" +
           "<br>" +
-          "<button onclick='addToFav()' id=''>Add</button>" +
-          "<br>" +
-          "<button onclick='deleteMarker()' id=''>Delete</button>" +
+          "<div id='btn-add'><button onclick='addToFav()' class='button-add'>+</button></div>" +
+          "<div id='btn-delete'><button onclick='deleteMarker()' class='button-delete'>-</button></div>" +
           "</div>"
       );
       infowindow.open(map, marker);

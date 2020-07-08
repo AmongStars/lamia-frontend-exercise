@@ -144,3 +144,36 @@ li {
 li:nth-child(odd) {
   background-color: #fcfcfc;
 }
+
+#btn-add {
+  margin-left: 100px;
+}
+
+#btn-delete {
+  margin-left: 100px;
+  margin-top: 5px;
+}
+
+.button-add {
+  border-radius: 100%;
+  border: 1px solid transparent;
+  background-color: #d2d2d2;
+  width: 21px;
+}
+
+.button-add:focus {
+  border-color: transparent !important;
+  outline: none;
+}
+
+.button-delete {
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background-color: #d2d2d2;
+  width: 21px;
+}
+
+.button-delete:focus {
+  border-color: transparent !important;
+  outline: none;
+}
