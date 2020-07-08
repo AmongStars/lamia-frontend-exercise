@@ -10,6 +10,10 @@ function initMap() {
     zoom: 12,
   });
 
+  userMarkers.forEach((marker) => {
+    marker.setMap(map);
+  });
+
   // Create the search box and link it to the UI element.
   var input = document.getElementById("search-input");
   var searchBox = new google.maps.places.SearchBox(input);
@@ -123,7 +127,7 @@ function initMap() {
 }
 
 function placeMarkerAndPanTo(latLng, map) {
-  if (marker !== undefined) {
+  if (marker !== undefined && !userMarkers.includes(marker)) {
     marker.setMap(null);
     marker = undefined;
   }
@@ -142,7 +146,6 @@ function deleteMarker() {
 }
 
 function addToFav() {
-  console.log(userMarkers.includes(marker));
   if (!userMarkers.includes(marker)) {
     userMarkers.push(marker);
     const node = document.getElementById("places");
