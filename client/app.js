@@ -82,7 +82,11 @@ function initMap() {
     marker.addListener("click", function () {
       infowindow.setContent(
         "<div>" +
-          "<div id='editableMarker'><strong>New place</strong></div>" +
+          "<div id='editableMarker'><strong><p id='place-title'>New place</p></strong><br>" +
+          "<p id='place-desc'>Description</p>" +
+          "<p id='map-coord'>Map coordinates</p>" +
+          "<p id='open-hours'>Opening hours</p>" +
+          "</div>" +
           "<div id='btn-add'><button onclick='addToFav()' class='button-add'>+</button></div>" +
           "<div id='btn-delete'><button id='marker-" +
           markerIndex +
@@ -126,6 +130,9 @@ function addToFav() {
   if (!Object.values(userMarkers).includes(marker)) {
     userMarkers[Object.keys(userMarkers).length] = marker;
     const node = document.getElementById("places");
+
+    marker.title = localStorage.getItem("place-title");
+
     const childNode = document.createElement("li");
     const textNode = document.createTextNode(marker.title);
     childNode.appendChild(textNode);
@@ -135,11 +142,13 @@ function addToFav() {
 
 function editMarker() {
   var btnToggle = document.getElementById("btn-edit");
+
   if (btnToggle.style.display !== "none") {
     btnToggle.style.display = "none";
     btnToggle = document.getElementById("btn-save");
     btnToggle.style.display = "block";
-    document.getElementById("editableMarker").contentEditable = "true";
+    document.getElementById("editableMarker").contentEditable = true;
+    document.addEventListener("keydown", logKey);
   } else {
     btnToggle.style.display = "block";
   }
@@ -147,23 +156,42 @@ function editMarker() {
 
 function saveMarker() {
   var btnToggle = document.getElementById("btn-save");
+  var editables = document.querySelectorAll(
+    "#place-title, #place-desc, #map-coord, #open-hours"
+  );
+
   if (btnToggle.style.display !== "none") {
     btnToggle.style.display = "none";
     btnToggle = document.getElementById("btn-edit");
     btnToggle.style.display = "block";
-    document.getElementById("editableMarker").contentEditable = "false";
+    document.getElementById("editableMarker").contentEditable = false;
+    for (var i = 0; i < editables.length; i++) {
+      localStorage.setItem(
+        editables[i].getAttribute("id"),
+        editables[i].innerHTML
+      );
+    }
   } else {
     btnToggle.style.display = "block";
   }
 }
 
-// Collapse Favourites
+// Collapse Favourites in left panel
 
 function collapsePlaces() {
-	var btnToggle = document.getElementById("left-panel-places");
-	if (btnToggle.style.display !== "none") {
-	  btnToggle.style.display = "none";
-	} else {
-	  btnToggle.style.display = "block";
+  var btnToggle = document.getElementById("left-panel-places");
+  if (btnToggle.style.display !== "none") {
+    btnToggle.style.display = "none";
+  } else {
+    btnToggle.style.display = "block";
+  }
+}
+
+// Prevent add empty sapce for separate id
+
+function logKey(e) {
+	if (e.keyCode === 13) {
+	  document.execCommand("insertHTML", false, "<br/>");
+	  return true;
 	}
   }
