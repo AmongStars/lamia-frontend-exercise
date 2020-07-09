@@ -13,7 +13,7 @@ body {
 }
 
 #description {
-  font-family: Roboto;
+  font-family: Roboto, sans-serif;
   font-size: 15px;
   font-weight: 300;
 }
@@ -37,8 +37,8 @@ body {
   -moz-box-sizing: border-box;
   outline: none;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  background-color: #fff;
-  font-family: Roboto;
+  background-color: #ffffff;
+  font-family: Roboto, sans-serif;
 }
 
 #pac-container {
@@ -52,36 +52,35 @@ body {
 }
 
 .pac-controls label {
-  font-family: Roboto;
+  font-family: Roboto, sans-serif;
   font-size: 13px;
   font-weight: 300;
 }
 
 #search-input {
-  background-color: #fff;
+  background-color: #ffffff;
   position: fixed;
-  font-family: Roboto;
-  font-size: 15px;
-  font-weight: 300;
-  margin-left: 210px;
-  margin-top: 10px;
   padding: 5px 11px 5px 13px;
   text-overflow: ellipsis;
   width: 300px;
   z-index: 10;
   border: 1px solid #b9b9b9;
+  font-family: Roboto, sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 210px;
+  margin-top: 10px;
 }
-
 #search-input:focus {
   border-color: #4d90fe;
 }
 
 #title {
-  color: #fff;
+  color: #ffffff;
   background-color: #4d90fe;
+  padding: 6px 12px;
   font-size: 25px;
   font-weight: 500;
-  padding: 6px 12px;
 }
 
 #target {
@@ -89,7 +88,7 @@ body {
 }
 
 #left-panel {
-  font-family: "Roboto", "sans-serif";
+  font-family: Roboto, sans-serif;
   line-height: 30px;
   padding-left: 10px;
 }
@@ -108,7 +107,7 @@ body {
 }
 
 #left-panel {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Roboto, sans-serif;
   position: absolute;
   left: 5px;
   top: 40%;
@@ -118,7 +117,7 @@ body {
   padding: 5px;
   z-index: 5;
   border: 1px solid #c1c1c1;
-  background: #fff;
+  background: #ffffff;
   overflow: auto;
   overflow-y: auto;
   overflow-x: hidden;
@@ -155,56 +154,47 @@ li:nth-child(odd) {
 #btn-add {
   margin-left: 100px;
 }
-
 #btn-delete {
   margin-left: 100px;
   margin-top: 5px;
 }
+#btn-save {
+  display: none;
+}
 
 .button-add {
   border-radius: 100%;
+  width: 21px;
   border: 1px solid transparent;
   background-color: #e4e4e4;
-  width: 21px;
 }
-
 .button-add:focus {
   border-color: transparent !important;
   outline: none;
 }
-
 .button-delete {
   border-radius: 50%;
+  width: 21px;
   border: 1px solid transparent;
   background-color: #e4e4e4;
-  width: 21px;
 }
-
 .button-delete:focus {
   border-color: transparent !important;
   outline: none;
 }
-
 .button-edit {
   border-radius: 10%;
   border: 1px solid transparent;
   background-color: #e4e4e4;
 }
-
 .button-edit:focus {
   border-color: transparent !important;
 }
-
-#btn-save {
-  display: none;
-}
-
 .button-save {
   border-radius: 10%;
   border: 1px solid transparent;
   background-color: #e4e4e4;
 }
-
 .button-save:focus {
   border-color: transparent !important;
 }
@@ -212,3 +202,5 @@ li:nth-child(odd) {
 #editableMarker p {
   margin: 0;
 }
+
+/*# sourceMappingURL=style.css.map */

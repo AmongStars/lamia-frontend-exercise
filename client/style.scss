@@ -1,0 +1,253 @@
+$clientFont: Roboto,
+sans-serif;
+$clientFontSize: 15px;
+$whiteColor: #ffffff;
+$buttonColor: #e4e4e4;
+
+/* Always set the map height explicitly to define the size of the div
+* element that contains the map. */
+#map {
+	height: 100%;
+}
+
+/* Optional: Makes the sample page fill the window. */
+html,
+body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+#description {
+	font: {
+		family: $clientFont;
+		size: $clientFontSize;
+		weight: 300;
+	}
+}
+
+#infowindow-content .title {
+	font-weight: bold;
+}
+
+#infowindow-content {
+	display: none;
+}
+
+#map #infowindow-content {
+	display: inline;
+}
+
+.pac-card {
+	margin: 10px 10px 0 0;
+	border-radius: 1px 0 0 1px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	outline: none;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+	background-color: $whiteColor;
+	font-family: $clientFont;
+}
+
+#pac-container {
+	padding-bottom: 12px;
+	margin-right: 12px;
+}
+
+.pac-controls {
+	display: inline-block;
+	padding: 5px 11px;
+}
+
+.pac-controls label {
+	$clientFontSize: 13px;
+
+	font: {
+		family: $clientFont;
+		size: $clientFontSize;
+		weight: 300;
+	}
+}
+
+#search-input {
+	background-color: $whiteColor;
+	position: fixed;
+	padding: 5px 11px 5px 13px;
+	text-overflow: ellipsis;
+	width: 300px;
+	z-index: 10;
+	border: 1px solid #b9b9b9;
+
+	font: {
+		family: $clientFont;
+		size: $clientFontSize;
+		weight: 300;
+	}
+
+	margin: {
+		left: 210px;
+		top: 10px;
+	}
+
+	&:focus {
+		border-color: #4d90fe;
+	}
+}
+
+#title {
+	color: $whiteColor;
+	background-color: #4d90fe;
+	padding: 6px 12px;
+	$clientFontSize: 25px;
+
+	font: {
+		size: $clientFontSize;
+		weight: 500;
+	}
+}
+
+#target {
+	width: 345px;
+}
+
+// Panel of Favourites
+
+#left-panel {
+	font-family: $clientFont;
+	line-height: 30px;
+	padding-left: 10px;
+}
+
+#left-panel {
+
+	select,
+	input {
+		font-size: $clientFontSize;
+	}
+}
+
+#left-panel select {
+	width: 100%;
+}
+
+#left-panel i {
+	$clientFontSize: 12px;
+	font-size: $clientFontSize;
+}
+
+#left-panel {
+	font-family: $clientFont;
+	position: absolute;
+	left: 5px;
+	top: 40%;
+	margin-top: -195px;
+	min-height: 30px;
+	width: 200px;
+	padding: 5px;
+	z-index: 5;
+	border: 1px solid #c1c1c1;
+	background: $whiteColor;
+	overflow: auto;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+#left-panel p {
+	text-align: center;
+	margin: 0;
+	background-color: #d2d2d2;
+	font-weight: bold;
+}
+
+ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	min-height: 0px;
+	max-height: 270px;
+	width: 200px;
+}
+
+li {
+	background-color: #f1f1f1;
+	padding: 10px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+li:nth-child(odd) {
+	background-color: #fcfcfc;
+}
+
+// Buttons styles
+
+#btn {
+	&-add {
+		margin-left: 100px;
+	}
+
+	&-delete {
+		margin: {
+			left: 100px;
+			top: 5px;
+		}
+	}
+
+	&-save {
+		display: none;
+	}
+}
+
+.button {
+
+	&-add {
+		border-radius: 100%;
+		width: 21px;
+		border: 1px solid transparent;
+		background-color: $buttonColor;
+
+		&:focus {
+			border-color: transparent !important;
+			outline: none;
+		}
+	}
+
+	&-delete {
+		border-radius: 50%;
+		width: 21px;
+		border: 1px solid transparent;
+		background-color: $buttonColor;
+
+		&:focus {
+			border-color: transparent !important;
+			outline: none;
+		}
+	}
+
+	&-edit {
+		border-radius: 10%;
+		border: 1px solid transparent;
+		background-color: $buttonColor;
+
+		&:focus {
+			border-color: transparent !important;
+		}
+	}
+
+	&-save {
+		border-radius: 10%;
+		border: 1px solid transparent;
+		background-color: $buttonColor;
+
+		&:focus {
+			border-color: transparent !important;
+		}
+	}
+}
+
+// Markers styles
+
+#editableMarker p {
+	margin: 0;
+}
