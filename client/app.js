@@ -134,25 +134,28 @@ function updateCurrentMarker(latLng, map) {
 }
 
 function deleteMarker(e) {
-	let { id } = e.target;
-	const markerIdStart = id.indexOf("-") + 1;
-	id = id.substring(markerIdStart, id.length);
+	let markerIndex = e.target.id;
+	markerIndex = getIndexFromMarkerId(markerIndex);
 
-	userMarkers[id].setMap(null);
-	delete userMarkers[id];
+	userMarkers[markerIndex].setMap(null);
+	delete userMarkers[markerIndex];
 	updateFav();
 }
 
+function getIndexFromMarkerId(id) {
+	const markerIdStart = id.indexOf("-") + 1;
+	return id.substring(markerIdStart, id.length);
+}
+
 function addToFav(e) {
-	let markerIndex = e.target.id; // marker-1
-	const markerIdStart = markerIndex.indexOf("-") + 1; // 7
-	markerIndex = markerIndex.substring(markerIdStart, markerIndex.length); // 1
+	let markerIndex = e.target.id;
+	markerIndex = getIndexFromMarkerId(markerIndex);
 
 	if (
 		!userMarkers[markerIndex] &&
 		!Object.values(userMarkers).includes(currentMarker)
 	) {
-		userMarkers[Object.keys(userMarkers).length] = currentMarker;
+		addNewMarker(currentMarker);
 		updateFav();
 	}
 }
@@ -230,6 +233,10 @@ function saveMarker(e) {
 		btnToggle.style.display = "block";
 	}
 	updateFav();
+}
+
+function addNewMarker(marker) {
+	userMarkers[Object.keys(userMarkers).length] = marker;
 }
 
 // Collapse Favourites in left panel
