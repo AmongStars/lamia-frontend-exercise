@@ -21,4 +21,25 @@ def get_markers():
     return Response(markers, mimetype="application/json", status=200)
 
 
+@app.route('/marker', methods=['POST'])
+def create_marker():
+    body = request.get_json()
+    marker = Markers(**body).save()
+    id = marker.id
+    return {'id': str(id)}, 200
+
+
+@app.route('/marker/<id>', methods=['PUT'])
+def update_marker(id):
+    body = request.get_json()
+    Markers.objects.get(id=id).update(**body)
+    return '', 200
+
+
+@app.route('/marker/<id>', methods=['DELETE'])
+def delete_marker(id):
+    Markers.objects.get(id=id).delete()
+    return '', 200
+
+
 app.run()
