@@ -5,7 +5,7 @@ var userMarkers = {};
 function initMap() {
 	var helsinki = new google.maps.LatLng(60.169, 24.938);
 
-	var map = new google.maps.Map(document.getElementById("map"), {
+	map = new google.maps.Map(document.getElementById("map"), {
 		center: helsinki,
 		zoom: 12,
 	});
@@ -114,6 +114,9 @@ function initMap() {
 	});
 
 	var infowindow = new google.maps.InfoWindow();
+
+	const theUrl = "http://127.0.0.1:5000/markers";
+	getMarkerFromDB(theUrl, callback);
 }
 
 function updateCurrentMarker(latLng, map) {
@@ -239,6 +242,12 @@ function addNewMarker(marker) {
 	userMarkers[Object.keys(userMarkers).length] = marker;
 }
 
+function showAllMarkers() {
+	Object.keys(userMarkers).forEach((markerKey) => {
+		userMarkers[markerKey].setMap(map);
+	});
+}
+
 // Collapse Favourites in left panel
 
 function collapsePlaces() {
@@ -257,4 +266,46 @@ function logKey(e) {
 		document.execCommand("insertHTML", false, "<br/>");
 		return true;
 	}
+}
+
+// Get Request
+
+function getMarkerFromDB(theUrl, callback, map) {
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.onreadystatechange = function () {
+		if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+			callback(xmlHttp.responseText);
+	};
+	xmlHttp.open("GET", theUrl, true); // true for asynchronous
+	xmlHttp.send(null);
+}
+
+function callback(response) {
+	// console.log(JSON.parse(response));
+
+	var data = JSON.parse(response);
+	console.log(response);
+	for (var i = 0; i < data.length; i++) {
+		var latLng_buff = data[i].position.split(",");
+		console.log(latLng_buff);
+
+		var position_buff = new google.maps.LatLng(
+			Number(latLng_buff[0].replace("(", "")),
+			Number(latLng_buff[1].replace(")", ""))
+		);
+
+		console.log(Number(latLng_buff[1].replace(")", "")));
+
+
+		var marker = new google.maps.Marker({
+			position: position_buff,
+			title: data[i].title,
+			description: data[i].description,
+			openingHours: data[i].openHours,
+		});
+
+		addNewMarker(marker);
+	}
+	showAllMarkers();
+	console.log(userMarkers);
 }

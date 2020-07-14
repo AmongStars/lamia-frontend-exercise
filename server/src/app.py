@@ -1,4 +1,5 @@
 from flask import Flask, request, Response
+from flask_cors import CORS
 
 import os
 
@@ -7,6 +8,7 @@ from database.models import Markers
 
 
 app = Flask(__name__)
+CORS(app)
 
 app.config['MONGODB_SETTINGS'] = {
     'host': 'mongodb+srv://' + os.environ['USERNAME'] + ':' + os.environ['PASSWORD'] + '@cluster0.y4gg7.mongodb.net/MapMarkers?retryWrites=true&w=majority'
