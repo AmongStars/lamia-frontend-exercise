@@ -1,6 +1,7 @@
 var map;
 var currentMarker;
 var userMarkers = {};
+var infowindow;
 
 function initMap() {
 	var helsinki = new google.maps.LatLng(60.169, 24.938);
@@ -113,7 +114,7 @@ function initMap() {
 		});
 	});
 
-	var infowindow = new google.maps.InfoWindow();
+	infowindow = new google.maps.InfoWindow();
 
 	const theUrl = "http://127.0.0.1:5000/markers";
 	getMarkerFromDB(theUrl, callback);
@@ -202,8 +203,6 @@ function saveMarker(e) {
 		"#place-title, #place-desc, #map-coord, #open-hours"
 	);
 
-	console.log("asd");
-
 	if (btnToggle.style.display !== "none") {
 		btnToggle.style.display = "none";
 		btnToggle = document.getElementById("btn-edit");
@@ -239,7 +238,43 @@ function saveMarker(e) {
 }
 
 function addNewMarker(marker) {
-	userMarkers[Object.keys(userMarkers).length] = marker;
+	var markerIndex = Object.keys(userMarkers).length;
+	userMarkers[markerIndex] = marker;
+
+	userMarkers[markerIndex].addListener("click", function () {
+		infowindow.close();
+
+		infowindow.setContent(
+			"<div>" +
+				"<div id='editableMarker'><strong><p id='place-title'>" +
+				marker.title +
+				"</p></strong><br>" +
+				"<p id='place-desc'>" +
+				marker.description +
+				"</p>" +
+				"<p id='map-coord'>" +
+				marker.position +
+				"</p>" +
+				"<p id='open-hours'>" +
+				marker.openingHours +
+				"</p>" +
+				"</div>" +
+				"<div id='btn-add'><button id='marker-" +
+				markerIndex +
+				"' onclick='addToFav(event)' class='button-add'>+</button></div>" +
+				"<div id='btn-delete'><button id='marker-" +
+				markerIndex +
+				"' onclick='deleteMarker(event)' class='button-delete'>-</button></div>" +
+				"<div id='btn-edit'><button onclick='editMarker()' class='button-edit'>Edit</button></div>" +
+				"<div id='btn-save'><button id='marker-" +
+				markerIndex +
+				"' onclick='saveMarker(event)' class='button-save'>Save</button></div>" +
+				"</div>"
+		);
+
+		infowindow.open(map, marker);
+	});
+	updateFav();
 }
 
 function showAllMarkers() {
@@ -281,10 +316,9 @@ function getMarkerFromDB(theUrl, callback, map) {
 }
 
 function callback(response) {
-	// console.log(JSON.parse(response));
-
 	var data = JSON.parse(response);
 	console.log(response);
+
 	for (var i = 0; i < data.length; i++) {
 		var latLng_buff = data[i].position.split(",");
 		console.log(latLng_buff);
@@ -295,7 +329,6 @@ function callback(response) {
 		);
 
 		console.log(Number(latLng_buff[1].replace(")", "")));
-
 
 		var marker = new google.maps.Marker({
 			position: position_buff,
