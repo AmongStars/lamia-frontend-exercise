@@ -3,8 +3,8 @@ from flask_cors import CORS
 
 import os
 
-from database.db import initialize_db
-from database.models import Markers
+from .database.db import initialize_db
+from .database.models import Markers
 
 
 app = Flask(__name__)
@@ -42,6 +42,3 @@ def update_marker(id):
 def delete_marker(id):
     Markers.objects.get(id=id).delete()
     return '', 200
-
-
-app.run()

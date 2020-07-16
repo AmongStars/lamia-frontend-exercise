@@ -116,7 +116,7 @@ function initMap() {
 
 	infowindow = new google.maps.InfoWindow();
 
-	const theUrl = "http://127.0.0.1:5000/markers";
+	const theUrl = "https://lamia-exercise-nb-server.herokuapp.com/markers";
 	getMarkerFromDB(theUrl, callback);
 }
 
